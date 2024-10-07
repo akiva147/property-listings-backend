@@ -58,19 +58,3 @@ router.post("/login", async (req: Request, res: Response) => {
     res.status(500).json({ message: "Error logging in", error });
   }
 });
-
-// Protected route
-router.get("/protected", (req: Request, res: Response) => {
-  const { JWT_SECRET } = validateEnvs();
-
-  const authHeader = req.headers.authorization;
-  const token = authHeader && authHeader.split(" ")[1];
-
-  if (!token) res.sendStatus(401);
-  else {
-    jwt.verify(token, JWT_SECRET, (err, user) => {
-      if (err) res.sendStatus(403);
-      res.json({ message: "Welcome to the protected route", user });
-    });
-  }
-});

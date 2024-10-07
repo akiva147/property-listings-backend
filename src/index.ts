@@ -17,10 +17,14 @@ import { connectToDatabase } from "./utils/db.util";
 import { authenticateToken } from "./middlewares/auth";
 
 const app = express();
-const { PORT } = validateEnvs();
+const { PORT, CLIENT_URL } = validateEnvs();
 
-app.use(cors());
-app.use(helmet());
+app.use(
+  cors({
+    origin: CLIENT_URL,
+  })
+);
+// app.use(helmet());
 app.use(compression({ level: 6 }));
 app.use(json());
 app.use(urlencoded({ extended: true }));

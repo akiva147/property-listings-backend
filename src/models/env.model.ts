@@ -5,6 +5,7 @@ export const EnvSchema = z.object({
   JWT_SECRET: z.string(),
   DB_CONNECTION: z.string(),
   DB_NAME: z.string(),
+  CLIENT_URL: z.string(),
 });
 
 export type Env = z.infer<typeof EnvSchema>;
