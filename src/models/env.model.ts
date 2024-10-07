@@ -1,0 +1,10 @@
+import { z } from "zod";
+
+export const EnvSchema = z.object({
+  PORT: z.string(),
+  JWT_SECRET: z.string(),
+  DB_CONNECTION: z.string(),
+  DB_NAME: z.string(),
+});
+
+export type Env = z.infer<typeof EnvSchema>;

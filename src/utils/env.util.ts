@@ -1,10 +1,4 @@
-import { z } from "zod";
-
-const EnvSchema = z.object({
-  PORT: z.string(),
-});
-
-type Env = z.infer<typeof EnvSchema>;
+import { Env, EnvSchema } from "../models/env.model";
 
 export const validateEnvs = (): Env => {
   const env = process.env;
