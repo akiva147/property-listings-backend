@@ -5,8 +5,8 @@ export const router = Router();
 type Counter = { value: number };
 
 router.get("/", async (req, res) => {
-  // console.log("router.get  req:", req);
   const db = getDb();
+
   try {
     const counter = await db.collection<Counter>("counter").findOne({});
     if (!counter) {
@@ -19,8 +19,10 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Adding one to the counter
 router.put("/add", async (req, res) => {
   const db = getDb();
+
   try {
     const result = await db
       .collection<Counter>("counter")

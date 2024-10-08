@@ -2,7 +2,6 @@ import { Response, NextFunction } from "express";
 import { Request } from "../types/express.type";
 import jwt from "jsonwebtoken";
 import { validateEnvs } from "../utils/env.utils";
-import { generateAccessToken } from "../utils/auth.utils";
 import { UserSchema } from "../models/user.model";
 
 export const authenticateToken = (
