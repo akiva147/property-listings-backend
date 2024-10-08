@@ -1,7 +1,9 @@
 import { Response, NextFunction } from "express";
 import { Request } from "../types/express.type";
 import jwt from "jsonwebtoken";
-import { validateEnvs } from "../utils/env.util";
+import { validateEnvs } from "../utils/env.utils";
+import { generateAccessToken } from "../utils/auth.utils";
+import { UserSchema } from "../models/user.model";
 
 export const authenticateToken = (
   req: Request,
@@ -14,9 +16,15 @@ export const authenticateToken = (
 
   if (!token) res.sendStatus(401);
   else {
-    jwt.verify(token, JWT_SECRET, (err, user) => {
-      if (err) res.sendStatus(403);
-      // Attach the user to the request object for further use in the route
+    jwt.verify(token, JWT_SECRET, (err, token) => {
+      console.log("jwt.verify  token:", token);
+      if (err || typeof token === "string" || !token) {
+        res.sendStatus(403);
+      }
+
+      const user = UserSchema.parse(token);
+
+      // Attach the user to the request object for use in the next middleware/route
       req.user = user;
       next();
     });

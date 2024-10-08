@@ -1,5 +1,5 @@
 import { MongoClient, Db } from "mongodb";
-import { validateEnvs } from "./env.util";
+import { validateEnvs } from "./env.utils";
 
 let db: Db;
 
