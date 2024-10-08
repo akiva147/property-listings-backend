@@ -16,7 +16,8 @@ export const authenticateToken = (
   if (!token) res.sendStatus(401);
   else {
     jwt.verify(token, JWT_SECRET, (err, token) => {
-      console.log("jwt.verify  token:", token);
+      // uncomment to debug token contents
+      // console.log("token:", token);
       if (err || typeof token === "string" || !token) {
         res.sendStatus(403);
       }
